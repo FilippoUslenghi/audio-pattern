@@ -226,3 +226,6 @@ ESC-50-master/
 
 # VSCODE
 .vscode/
+
+# Jetbrains
+.idea/
