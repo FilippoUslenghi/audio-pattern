@@ -1,41 +1,41 @@
-Model,Class,Precision,Recall,F1-score
-KNN,0,0.67,0.5,0.57
-KNN,1,0.44,0.5,0.47
-KNN,2,0.5,0.38,0.43
-KNN,3,1.0,1.0,1.0
-KNN,4,0.71,0.62,0.67
-KNN,5,0.55,0.75,0.63
-KNN,6,0.6,0.38,0.46
-KNN,7,1.0,0.75,0.86
-KNN,8,0.67,1.0,0.8
-KNN,9,0.7,0.88,0.78
-SVM,0,0.67,0.75,0.71
-SVM,1,0.71,0.62,0.67
-SVM,2,0.78,0.88,0.82
-SVM,3,1.0,1.0,1.0
-SVM,4,1.0,0.88,0.93
-SVM,5,0.75,0.75,0.75
-SVM,6,0.38,0.38,0.38
-SVM,7,1.0,1.0,1.0
-SVM,8,0.88,0.88,0.88
-SVM,9,0.88,0.88,0.88
-MLP,0,1.0,0.75,0.86
-MLP,1,0.86,0.75,0.8
-MLP,2,0.89,1.0,0.94
-MLP,3,1.0,1.0,1.0
-MLP,4,0.6,0.75,0.67
-MLP,5,0.75,0.75,0.75
-MLP,6,0.5,0.5,0.5
-MLP,7,1.0,1.0,1.0
-MLP,8,0.7,0.88,0.78
-MLP,9,0.83,0.62,0.71
-Random Forest,0,1.0,0.88,0.93
-Random Forest,1,0.88,0.88,0.88
-Random Forest,2,0.88,0.88,0.88
-Random Forest,3,1.0,0.88,0.93
-Random Forest,4,0.78,0.88,0.82
-Random Forest,5,0.71,0.62,0.67
-Random Forest,6,0.67,0.75,0.71
-Random Forest,7,1.0,1.0,1.0
-Random Forest,8,0.88,0.88,0.88
-Random Forest,9,0.89,1.0,0.94
+Model,Class,F1-score
+KNN,0,0.62
+KNN,1,0.67
+KNN,2,0.31
+KNN,3,1.0
+KNN,4,0.5
+KNN,5,0.59
+KNN,6,0.43
+KNN,7,0.86
+KNN,8,0.76
+KNN,9,0.56
+SVM,0,0.7
+SVM,1,0.8
+SVM,2,0.67
+SVM,3,0.94
+SVM,4,0.67
+SVM,5,0.67
+SVM,6,0.29
+SVM,7,0.94
+SVM,8,0.78
+SVM,9,0.82
+MLP,0,0.67
+MLP,1,0.46
+MLP,2,0.93
+MLP,3,1.0
+MLP,4,0.71
+MLP,5,0.71
+MLP,6,0.38
+MLP,7,0.94
+MLP,8,0.78
+MLP,9,0.84
+Random Forest,0,0.89
+Random Forest,1,0.71
+Random Forest,2,0.82
+Random Forest,3,0.93
+Random Forest,4,0.62
+Random Forest,5,0.62
+Random Forest,6,0.53
+Random Forest,7,1.0
+Random Forest,8,0.93
+Random Forest,9,0.78
