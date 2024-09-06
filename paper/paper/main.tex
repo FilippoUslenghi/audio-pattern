@@ -518,7 +518,7 @@ For the K-NN algorithm, different numbers of neighbors were tested, ranging from
     \label{fig:knn_confusion_matrix}
 \end{figure}
 
-For the SVM, a grid search was conducted to test different values for the hyper-parameters C and gamma, each varying between 0.01, 0.1, 1, 10, and 100. Additionally, different kernel functions were tested, including radial basis function (RBF), polynomial, and sigmoidal.
+For the SVM, a grid search was conducted to test different values for the hyper-parameters C and gamma, each varying between 0.01, 0.1, 1, 10, and 100. Additionally, different kernel functions were tested, including radial basis function (RBF), polynomial, and sigmoidal. A one-vs-one strategy was employed to handle the multiclass classification task.
 The cross-validation results showed that using a C with value 1, gamma with value 0.01 and an RBF kernel was the optimal choice, obtaining a 0.68 accuracy on the test set. The confusion matrix (Fig. \ref{fig:svm_confusion_matrix}) reveals that the class corresponding to "rain" was the most challenging to identify.
 \begin{figure}[ht]
     \centering
