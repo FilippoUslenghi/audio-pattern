@@ -156,6 +156,7 @@
 % *** MATH PACKAGES ***
 %
 \usepackage{amsmath}
+\usepackage{booktabs}
 % A popular package from the American Mathematical Society that provides
 % many useful and powerful commands for dealing with mathematics.
 %
@@ -492,7 +493,7 @@ All the extracted features followed standardization and were used as input for f
 
 \section{Experimental setup}
 \subsection{Dataset}
-The dataset used in this work is the ESC-10 dataset, which is a smaller part of the larger ESC-50 dataset \cite{esc-50}, designed for classifying environmental sounds. It includes recordings of ten different sounds: dog bark, rain, sea waves, baby cry, clock tick, person sneeze, helicopter, chainsaw, rooster, and fire crackling. There are 40 recordings for each sound, making the dataset completely balanced with a total of 400 audio files. These recordings come from free and public sources, capturing a variety of real-life sounds. All audio files in the ESC-10 dataset are in WAV format and each is 5 seconds long. They have a sampling rate of 44.1 kHz with a single channel and a bit depth of 16-bit.
+The dataset used in this work is the ESC-10 dataset, which is a smaller part of the larger ESC-50 dataset \cite{esc-50}, designed for classifying environmental sounds. It includes recordings of 10 different sounds: dog bark, rain, sea waves, baby cry, clock tick, person sneeze, helicopter, chainsaw, rooster, and fire crackling (here denoted with integers from 0 to 9). There are 40 recordings for each sound, making the dataset completely balanced with a total of 400 audio files. These recordings come from free and public sources, capturing a variety of real-life sounds. All audio files in the ESC-10 dataset are in WAV format and each is 5 seconds long. They have a sampling rate of 44.1 kHz with a single channel and a bit depth of 16-bit.
 The dataset was then split into a training set of 300 samples files and a test set of 100 samples, preserving class balance.
 
 \subsection{Feature extraction}
@@ -546,11 +547,30 @@ Finally, the Random Forest classifier was trained using the same procedure. The 
 
 \subsection{Results}
 Aside from accuracy also precision, recall, and F1-score were computed to evaluate the models comprehensively. Additionally, for comparison purposes, a baseline dummy classifier was tested, which classified the test data by randomly choosing from a uniform distribution over the classes. This choice is motivated by the fact that the train set was completely balanced with respect to class distribution.
-The performance of all classifiers is reported in Fig. \ref{fig:model_comparison}.
-\begin{figure}[h]
+The performance of all classifiers is reported in Table \ref{tab:scores} and in Fig. \ref{fig:model_comparison}.
+
+\begin{table}
+\centering
+\caption{Accuracy, precision, recall and F1 score of all the models.}
+\begin{tabular}{lrrrr}
+\toprule
+Model & Accuracy & Precision & Recall & F1-score \\
+\midrule
+Dummy & 0.10 & 0.10 & 0.10 & 0.10 \\
+KNN & 0.60 & 0.62 & 0.60 & 0.59 \\
+SVM & 0.68 & 0.68 & 0.68 & 0.67 \\
+MLP & 0.69 & 0.69 & 0.69 & 0.68 \\
+Random Forest & 0.78 & 0.78 & 0.78 & 0.77 \\
+\bottomrule
+\hfill
+\end{tabular}
+\label{tab:scores}
+\end{table}
+
+\begin{figure}
     \centering
     \includegraphics[width=\linewidth]{model_comparison.pdf}
-    \caption{Accuracy, precision, recall and F1 score of all the models tested and a baseline classifier.}
+    \caption{Accuracy, precision, recall and F1 score of all the models tested and the baseline classifier.}
     \label{fig:model_comparison}
 \end{figure}
 
@@ -558,13 +578,30 @@ The results clearly show that all classifiers performed significantly better tha
 
 Comparing the results with those reported in \cite{esc-50} reveals some differences. The K-NN classifier in this study performed worse, with an accuracy of 60\% compared to 66.7\% in their work. The SVM classifier showed similar performance, achieving 68\% accuracy compared to 67.5\% in their study. However, the Random Forest classifier performed better, with an accuracy of 78\% compared to 72.7\% in their work. This variation in results is likely due to differences in the features used. Piczak et al. used only Zero Crossing Rate (ZCR) and the first 12 MFCCs, excluding the \nth{0} MFCC, whereas this study incorporated more features including energy, energy entropy, and 27 additional MFCCs.
 
-Finally, an inspection of the F1-scores obtained by each model across each classes can help identify which classes were the most difficult to classify and which were easier to classify. This information is represented in Fig. \ref{fig:class_f1} revealing that the class related to rain sounds was the hardest to identify overall, while the sounds of a crying baby and a crowing rooster were easily detected.
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=\linewidth]{class_f1.pdf}
-    \caption{F1-score obtained by all classifiers over each class.}
-    \label{fig:class_f1}
-\end{figure}
+Finally, an inspection of the F1-scores obtained by each model across each classes can help identify which classes were the most difficult to classify and which were easier to classify. This information is represented in Fig. \ref{fig:class_f1} revealing that the class related to rain sounds was the hardest to identify overall, while the sounds of a crying baby and a crowing rooster were easily detected. This results are also displayed in Table \ref{tab:f1-scores}.
+\begin{table}[t]
+\centering
+\caption{F1-score of all classifiers over all classes.}
+\begin{tabular}{lrrrr}
+\toprule
+Model & KNN & MLP & Random Forest & SVM \\
+Class &  &  &  &  \\
+\midrule
+0 & 0.60 & 0.64 & 0.90 & 0.73 \\
+1 & 0.62 & 0.60 & 0.62 & 0.56 \\
+2 & 0.25 & 0.82 & 0.70 & 0.53 \\
+3 & 0.95 & 0.90 & 0.90 & 0.95 \\
+4 & 0.57 & 0.38 & 0.76 & 0.71 \\
+5 & 0.60 & 0.71 & 0.56 & 0.56 \\
+6 & 0.33 & 0.47 & 0.60 & 0.24 \\
+7 & 0.89 & 0.86 & 0.95 & 0.95 \\
+8 & 0.71 & 0.69 & 0.91 & 0.72 \\
+9 & 0.42 & 0.74 & 0.83 & 0.75 \\
+\bottomrule
+\end{tabular}
+\label{tab:f1-scores}
+\end{table}
+
 
 
 % An example of a floating figure using the graphicx package.
@@ -668,6 +705,13 @@ This study focused on classifying environmental sounds from the ESC-10 dataset u
 The results demonstrated that all classifiers significantly outperformed the dummy classifier, indicating their ability to capture meaningful patterns in the audio data. Among the classifiers, the Random Forest algorithm achieved the highest accuracy of 0.78.
 
 F1-scores for each class were examined to determine which sounds were most challenging to identify. It was observed that rain sounds were the most difficult to classify, while the sounds of a crying baby and a crowing rooster were more easily detected.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{class_f1.pdf}
+    \caption{F1-score obtained by all classifiers over each class.}
+    \label{fig:class_f1}
+\end{figure}
 
 In summary, while simpler models such as K-NN offer a baseline level of performance, more advanced models, including SVM, MLP, and particularly Random Forest, provide higher accuracy.
 
