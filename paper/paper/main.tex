@@ -430,7 +430,7 @@ Dipartimento di Informatica, Università degli Studi di Milano, Milan, Italy}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-This study evaluates several traditional machine learning models — K-NN, SVM, MLP and Random Forest — on the ESC-10 dataset. Features such as MFCCs and ZCR were extracted from audio signals, and each model was optimized using cross-validation. The results show that all models outperformed a baseline dummy classifier, with Random Forest achieving the highest accuracy. This study highlights the potential of traditional machine learning methods for ESC and identifies the most challenging and easily classified sound categories.
+This study evaluates several traditional machine learning models — K-NN, SVM, MLP and Random Forest — on the ESC-10 dataset. Features such as MFCCs, energy, energy entropy and ZCR were extracted from audio signals, and each model was optimized using cross-validation. The results show that all models outperformed a baseline dummy classifier, with Random Forest achieving the highest accuracy. This study highlights the capabilities of traditional machine learning methods for ESC and identifies the most challenging and easily classified sound categories.
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
@@ -489,7 +489,7 @@ This study focuses on evaluating the performance of traditional machine learning
 
 The audio classification pipeline follows a standard procedure, shown in Fig. \ref{fig:pipeling}. First, all signals were converted to a single channel, resampled to a frequency of 44.1 kHz, and normalized using their Root Mean Squared (RMS) value. From the pre-processed signals time domain features were extracted, namely ZCR, Energy, and Energy Entropy, along with 39 MFCCs, from the \nth{1} to the \nth{40} (the \nth{0} was discarded as it relates to the signal's energy). Time domain features were extracted using a short-term window. Mid-term statistics were then computed and averaged over the entire signal for a long-term perspective.
 
-All the extracted features followed standardization and were used as input for four classifiers: K-NN, SVM, MLP, and Random Forest.
+All the extracted features followed standardization and were used as input to four classifiers: K-NN, SVM, MLP, and Random Forest.
 
 \section{Experimental setup}
 \subsection{Dataset}
@@ -520,7 +520,7 @@ For the K-NN algorithm, different numbers of neighbors were tested, ranging from
 \end{figure}
 
 For the SVM, a grid search was conducted to test different values for the hyper-parameters C and gamma, each varying between 0.01, 0.1, 1, 10, and 100. Additionally, different kernel functions were tested, including radial basis function (RBF), polynomial, and sigmoidal. A one-vs-one strategy was employed to handle the multiclass classification task.
-The cross-validation results showed that using a C with value 1, gamma with value 0.01 and an RBF kernel was the optimal choice, obtaining a 0.68 accuracy on the test set. The confusion matrix (Fig. \ref{fig:svm_confusion_matrix}) reveals that the class corresponding to "rain" was the most challenging to identify.
+The cross-validation results showed that using a constraint parameter C with value 1, gamma with value 0.01 and an RBF kernel was the optimal choice, obtaining a 0.68 accuracy on the test set. The confusion matrix (Fig. \ref{fig:svm_confusion_matrix}) reveals that the class corresponding to "rain" was the most challenging to identify.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{confusion_matrix_svm.pdf}
@@ -576,7 +576,7 @@ Random Forest & 0.78 & 0.78 & 0.78 & 0.77 \\
 
 The results clearly show that all classifiers performed significantly better than the dummy classifier, suggesting that they were able to capture meaningful patterns within the data. The K-NN classifier was the least performing, likely due to its simplicity. Indeed, more complex models, such as the non-linear SVM and MLP, improved the classification accuracy by 13\% and 15\%, respectively. However, the most effective algorithm was the Random Forest, which showed a 30\% improvement over K-NN, approximately 15\% over SVM, and 13\% over MLP. This suggests that an ensemble of many small classifiers can better model the underlying distribution of the features.
 
-Comparing the results with those reported in \cite{esc-50} reveals some differences. The K-NN classifier in this study performed worse, with an accuracy of 60\% compared to 66.7\% in their work. The SVM classifier showed similar performance, achieving 68\% accuracy compared to 67.5\% in their study. However, the Random Forest classifier performed better, with an accuracy of 78\% compared to 72.7\% in their work. This variation in results is likely due to differences in the features used. Piczak et al. used only Zero Crossing Rate (ZCR) and the first 12 MFCCs, excluding the \nth{0} MFCC, whereas this study incorporated more features including energy, energy entropy, and 27 additional MFCCs.
+Comparing the results with those reported in \cite{esc-50} reveals some differences. The K-NN classifier in this study performed worse, with an accuracy of 60\% compared to 66.7\% in their work. The SVM classifier showed similar performance, achieving 68\% accuracy compared to 67.5\% in their study. However, the Random Forest classifier performed better, with an accuracy of 78\% compared to 72.7\% in their work. This variation in results is likely due to differences in the features used. Piczak et al. used only Zero Crossing Rate (ZCR) and the first 12 MFCCs (excluding the \nth{0} MFCC), whereas this study incorporated more features including energy, energy entropy, and 27 additional MFCCs.
 
 Finally, an inspection of the F1-scores obtained by each model across each classes can help identify which classes were the most difficult to classify and which were easier to classify. This information is represented in Fig. \ref{fig:class_f1} revealing that the class related to rain sounds was the hardest to identify overall, while the sounds of a crying baby and a crowing rooster were easily detected. This results are also displayed in Table \ref{tab:f1-scores}.
 \begin{table}[t]
@@ -713,7 +713,7 @@ F1-scores for each class were examined to determine which sounds were most chall
     \label{fig:class_f1}
 \end{figure}
 
-In summary, while simpler models such as K-NN offer a baseline level of performance, more advanced models, including SVM, MLP, and particularly Random Forest, provide higher accuracy.
+In summary, while simpler models such as K-NN offer a baseline level of performance, more advanced models, such as SVM, MLP, and particularly Random Forest, provide higher accuracy.
 
 % if have a single appendix:
 %\appendix[Proof of the Zonklar Equations]
